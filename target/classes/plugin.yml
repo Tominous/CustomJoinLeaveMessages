@@ -1,0 +1,46 @@
+name: CustomJoinLeaveMessages
+version: 1.0
+main: com.vexkoala.customjoinleavemessages.CustomJoinLeaveMessages
+api-version: 1.16
+prefix: CustomJoinLeaveMessages
+load: STARTUP
+authors: [VexKoala]
+description: Manage custom join/leave messages for each player!
+commands:
+  customjoinmessage:
+    description: Sets custom join message.
+    usage: '§6Usage: §e/<command> <view|user [username]> set [message]'
+    permission: cjlm.customjoinmessage
+    permission-message: §cYou don't have permission!
+    aliases: [cjm]
+  customleavemessage:
+    description: Sets custom leave message.
+    usage: '§6Usage: §e/<command> <view|user [username]> set [message]'
+    permission: cjlm.customleavemessage
+    permission-message: §cYou don't have permission!
+    aliases: [clm]
+  customjoinleavemessages:
+    description: Plugin info.
+    usage: '§6Usage: §e/<command> <reload>'
+    permission: cjlm.customjoinleavemessages
+    permission-message: §cYou don't have permission!
+    aliases: [cjlm]
+permissions:
+  cjlm.customjoinmessage:
+    description: Allows customjoinmessage command
+    default: op
+  cjlm.customjoinmessage.color:
+    description: Allows use of color in custom join message
+    default: op
+  cjlm.customleavemessage:
+    description: Allows customleavemessage command
+    default: op
+  cjlm.customleavemessage.color:
+    description: Allows use of color in custom leave message
+    default: op
+  cjlm.customjoinleavemessages:
+    description: Allows customjoinleavemessages command
+    default: op
+  cjlm.customjoinleavemessages.reload:
+    description: Allows reloading the plugin
+    default: op

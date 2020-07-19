@@ -1,0 +1,7 @@
+com\vexkoala\customjoinleavemessages\events\PlayerQuit.class
+com\vexkoala\customjoinleavemessages\commands\CommandCustomJoinLeaveMessages.class
+com\vexkoala\customjoinleavemessages\commands\CommandCustomJoinMessage.class
+com\vexkoala\customjoinleavemessages\events\PlayerJoin.class
+com\vexkoala\customjoinleavemessages\commands\CommandCustomLeaveMessage.class
+com\vexkoala\customjoinleavemessages\Data.class
+com\vexkoala\customjoinleavemessages\CustomJoinLeaveMessages.class

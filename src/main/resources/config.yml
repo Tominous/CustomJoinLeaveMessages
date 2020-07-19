@@ -1,0 +1,65 @@
+# *-------------------------------*
+# |    CustomJoinLeaveMessages    |
+# |            Config             |
+# *-------------------------------*
+#
+# If set to false, plugin will be disabled.
+# default: true
+enabled: true
+
+# Placeholders:
+#   [playerName]         - player username
+#   [playerDisplayName]  - player display name
+#   [totalUsers]         - number of unique players
+messages:
+  join:
+    # If set to true, custom join messages will be disabled.
+    # default: false
+    disabled: false
+    # Prefix of a join message, players can't change this part of the message.
+    # It will always be displayed before the custom message players can set with /customjoinmessage set [message]
+    # If you want to let players have full control of their join message, set this to ''
+    # default: '&a+ &7[playerName] '
+    prefix: '&a+ &7[playerName] '
+    # Join message, players can change this
+    # default: 'joined the game'
+    message: 'joined the game'
+    # Max characters allowed for join message
+    # default: 30
+    max-characters: 30
+  leave:
+    # If set to true, custom leave messages will be disabled.
+    # default: false
+    disabled: false
+    # Prefix of a leave message, players can't change this part of the message.
+    # It will always be displayed before the custom message players can set with /customleavemessage set [message]
+    # If you want to let players have full control of their leave message, set this to ''
+    # default: '&c- &7[playerName] '
+    prefix: '&c- &7[playerName] '
+    # Leave message, players can change this
+    # default: 'left the game'
+    message: 'left the game'
+    # Max characters allowed for leave message
+    # default: 30
+    max-characters: 30
+  first-join:
+    # If set to true, custom first join messages will be disabled.
+    # default: false
+    disabled: false
+    # First join message that is broadcasted when new player joins the server
+    # default: '&7[playerName] &ahas joined the server for the first time! &8[&d[totalUsers]&8]'
+    message: '&7[playerName] &ahas joined the server for the first time! &8[&d[totalUsers]&8]'
+  user-welcome:
+    # If set to true, user welcome message on first join will be disabled.
+    # default: false
+    disabled: false
+    # User welcome message on first join
+    # default: '&aWelcome to the server, &7[playerName]&a!'
+    message: '&aWelcome to the server, &7[playerName]&a!'
+  user-welcome-back:
+    # If set to true, user welcome back message will be disabled.
+    # default: false
+    disabled: false
+    # User welcome back message
+    # default: '&7Welcome back, [playerName]!'
+    message: '&7Welcome back, [playerName]!'
