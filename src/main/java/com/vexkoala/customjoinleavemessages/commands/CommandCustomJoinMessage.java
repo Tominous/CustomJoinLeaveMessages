@@ -30,6 +30,13 @@ public class CommandCustomJoinMessage implements TabExecutor
 
                 if (args[0].equalsIgnoreCase("user")) // /cjm user [username] set [message]
                 {
+                    if (!sender.hasPermission("cjlm.customjoinmessage.others"))
+                    {
+                        String error = formatColors(Data.get().getString("lang.NO_PERM"));
+                        sender.sendMessage(error);
+                        return false;
+                    }
+
                     if (args.length < 4)
                     {
                         String error = formatColors(Data.get().getString("lang.TOO_FEW_ARGS"));
@@ -61,7 +68,7 @@ public class CommandCustomJoinMessage implements TabExecutor
                         Data.get().set("messages." + playerUUID + ".join", message);
                         Data.save();
 
-                        String success = formatMessage(Data.get().getString("lang.CJM_ADMIN"), playerName, message);
+                        String success = formatMessage(Data.get().getString("lang.PLUGIN_PREFIX") + Data.get().getString("lang.CJM_ADMIN"), playerName, message);
                         sender.sendMessage(success);
                         return true;
                     }
@@ -102,7 +109,7 @@ public class CommandCustomJoinMessage implements TabExecutor
                         Data.get().set("messages." + playerUUID + ".join", message);
                         Data.save();
 
-                        String success = formatMessage(Data.get().getString("lang.CJM_PLAYER"), player, message);
+                        String success = formatMessage(Data.get().getString("lang.PLUGIN_PREFIX") + Data.get().getString("lang.CJM_PLAYER"), player, message);
                         sender.sendMessage(success);
                         return true;
                     }
@@ -112,27 +119,38 @@ public class CommandCustomJoinMessage implements TabExecutor
                 }
                 else if (args[0].equalsIgnoreCase("view")) // /cjm view
                 {
-                    if (sender instanceof Player)
+                    if (args.length > 2)
                     {
-                        if (args.length > 2)
+                        String error = formatColors(Data.get().getString("lang.TOO_MANY_ARGS"));
+                        sender.sendMessage(error);
+                        return false;
+                    }
+
+                    if (args.length == 2) // /cjm view [username]
+                    {
+                        if (!sender.hasPermission("cjlm.customjoinmessage.view.others"))
                         {
-                            String error = formatColors(Data.get().getString("lang.TOO_MANY_ARGS"));
+                            String error = formatColors(Data.get().getString("lang.NO_PERM"));
                             sender.sendMessage(error);
                             return false;
                         }
 
-                        if (args.length == 2)
+                        // Get player UUID
+                        String playerName = args[1];
+                        String playerUUID = Bukkit.getServer().getOfflinePlayer(playerName).getUniqueId().toString();
+                        if (Data.get().getString("messages." + playerUUID + ".join") != null)
                         {
-                            // Get player UUID
-                            String playerName = args[1];
-                            String playerUUID = Bukkit.getServer().getOfflinePlayer(playerName).getUniqueId().toString();
-                            if (Data.get().getString("messages." + playerUUID + ".join") != null)
-                            {
-                                String message = formatColors(formatMessage(Data.get().getString("lang.CJM_DISPLAY_MSG_ADMIN"), playerName, Data.get().getString("messages." + playerUUID + ".join")));
-                                sender.sendMessage(message);
-                                return true;
-                            }
+                            String message = formatColors(formatMessage(Data.get().getString("lang.PLUGIN_PREFIX") + Data.get().getString("lang.CJM_DISPLAY_MSG_ADMIN"), playerName, Data.get().getString("messages." + playerUUID + ".join")));
+                            sender.sendMessage(message);
+                            return true;
                         }
+                        String error = formatColors(Data.get().getString("lang.MSG_NOT_SET"));
+                        sender.sendMessage(error);
+                        return false;
+                    }
+
+                    if (sender instanceof Player)
+                    {
                         // Get player UUID
                         Player player = (Player) sender;
                         String playerUUID = player.getUniqueId().toString();
@@ -140,7 +158,7 @@ public class CommandCustomJoinMessage implements TabExecutor
                         // Get message from data.yml
                         if (Data.get().getString("messages." + playerUUID + ".join") != null)
                         {
-                            String message = formatColors(formatMessage(Data.get().getString("lang.CJM_DISPLAY_MSG_PLAYER"), player, Data.get().getString("messages." + playerUUID + ".join")));
+                            String message = formatColors(formatMessage(Data.get().getString("lang.PLUGIN_PREFIX") + Data.get().getString("lang.CJM_DISPLAY_MSG_PLAYER"), player, Data.get().getString("messages." + playerUUID + ".join")));
                             sender.sendMessage(message);
                             return true;
                         }

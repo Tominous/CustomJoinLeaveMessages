@@ -20,7 +20,7 @@ commands:
     permission-message: §cYou don't have permission!
     aliases: [clm]
   customjoinleavemessages:
-    description: Plugin info.
+    description: Plugin info and reload.
     usage: '§6Usage: §e/<command> <reload>'
     permission: cjlm.customjoinleavemessages
     permission-message: §cYou don't have permission!
@@ -32,15 +32,24 @@ permissions:
   cjlm.customjoinmessage.color:
     description: Allows use of color in custom join message
     default: op
+  cjlm.customjoinmessage.others:
+    description: Allows setting of someone elses custom join message
+    default: op
+  cjlm.customjoinmessage.view.others:
+    description: Allows viewing of someone elses custom join message
+    default: op
   cjlm.customleavemessage:
     description: Allows customleavemessage command
     default: op
   cjlm.customleavemessage.color:
     description: Allows use of color in custom leave message
     default: op
-  cjlm.customjoinleavemessages:
-    description: Allows customjoinleavemessages command
+  cjlm.customleavemessage.others:
+    description: Allows setting of someone elses custom leave message
     default: op
-  cjlm.customjoinleavemessages.reload:
+  cjlm.customleavemessage.view.others:
+    description: Allows viewing of someone elses custom leave message
+    default: op
+  cjlm.reload:
     description: Allows reloading the plugin
     default: op

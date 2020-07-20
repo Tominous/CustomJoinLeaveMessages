@@ -31,16 +31,16 @@ public class CommandCustomJoinLeaveMessages implements TabExecutor
 
                 if (args[0].equalsIgnoreCase("reload"))
                 {
-                    if (sender.hasPermission("cjlm.customjoinleavemessages.reload"))
+                    if (sender.hasPermission("cjlm.reload"))
                     {
                         plugin.reloadConfig();
                         Data.reload();
 
-                        String success = formatColors(Data.get().getString("lang.RELOAD_SUCCESS"));
+                        String success = formatColors(Data.get().getString("lang.PLUGIN_PREFIX") + Data.get().getString("lang.RELOAD_SUCCESS"));
                         sender.sendMessage(success);
                         return true;
                     }
-                    String error = formatColors(Data.get().getString("lang.NO_PERMS"));
+                    String error = formatColors(Data.get().getString("lang.NO_PERM"));
                     sender.sendMessage(error);
                     return false;
                 }
@@ -50,7 +50,7 @@ public class CommandCustomJoinLeaveMessages implements TabExecutor
             }
             else
             {
-                String success = formatColors("&8--------------[&e " + plugin.getDescription().getPrefix() + " &8]--------------\n" +
+                String success = formatColors("&8--------------[&b " + plugin.getDescription().getPrefix() + " &8]--------------\n" +
                                                     "&fVersion: &a" + plugin.getDescription().getVersion() + "\n" +
                                                     "&a" + plugin.getDescription().getDescription() + "\n" +
                                                     "&fAuthor: &a" + plugin.getDescription().getAuthors() + "\n" +

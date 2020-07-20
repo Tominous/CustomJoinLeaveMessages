@@ -30,6 +30,13 @@ public class CommandCustomLeaveMessage implements TabExecutor
 
                 if (args[0].equalsIgnoreCase("user")) // /clm user [username] set [message]
                 {
+                    if (!sender.hasPermission("cjlm.customleavemessage.others"))
+                    {
+                        String error = formatColors(Data.get().getString("lang.NO_PERM"));
+                        sender.sendMessage(error);
+                        return false;
+                    }
+
                     if (args.length < 4)
                     {
                         String error = formatColors(Data.get().getString("lang.TOO_FEW_ARGS"));
@@ -61,7 +68,7 @@ public class CommandCustomLeaveMessage implements TabExecutor
                         Data.get().set("messages." + playerUUID + ".leave", message);
                         Data.save();
 
-                        String success = formatMessage(Data.get().getString("lang.CLM_ADMIN"), playerName, message);
+                        String success = formatMessage(Data.get().getString("lang.PLUGIN_PREFIX") + Data.get().getString("lang.CLM_ADMIN"), playerName, message);
                         sender.sendMessage(success);
                         return true;
                     }
@@ -102,7 +109,7 @@ public class CommandCustomLeaveMessage implements TabExecutor
                         Data.get().set("messages." + playerUUID + ".leave", message);
                         Data.save();
 
-                        String success = formatMessage(Data.get().getString("lang.CLM_PLAYER"), player, message);
+                        String success = formatMessage(Data.get().getString("lang.PLUGIN_PREFIX") + Data.get().getString("lang.CLM_PLAYER"), player, message);
                         sender.sendMessage(success);
                         return true;
                     }
@@ -112,27 +119,38 @@ public class CommandCustomLeaveMessage implements TabExecutor
                 }
                 else if (args[0].equalsIgnoreCase("view")) // /clm view
                 {
-                    if (sender instanceof Player)
+                    if (args.length > 2)
                     {
-                        if (args.length > 2)
+                        String error = formatColors(Data.get().getString("lang.TOO_MANY_ARGS"));
+                        sender.sendMessage(error);
+                        return false;
+                    }
+
+                    if (args.length == 2) // /clm view [username]
+                    {
+                        if (!sender.hasPermission("cjlm.customleavemessage.view.others"))
                         {
-                            String error = formatColors(Data.get().getString("lang.TOO_MANY_ARGS"));
+                            String error = formatColors(Data.get().getString("lang.NO_PERM"));
                             sender.sendMessage(error);
                             return false;
                         }
 
-                        if (args.length == 2)
+                        // Get player UUID
+                        String playerName = args[1];
+                        String playerUUID = Bukkit.getServer().getOfflinePlayer(playerName).getUniqueId().toString();
+                        if (Data.get().getString("messages." + playerUUID + ".leave") != null)
                         {
-                            // Get player UUID
-                            String playerName = args[1];
-                            String playerUUID = Bukkit.getServer().getOfflinePlayer(playerName).getUniqueId().toString();
-                            if (Data.get().getString("messages." + playerUUID + ".leave") != null)
-                            {
-                                String message = formatColors(formatMessage(Data.get().getString("lang.CLM_DISPLAY_MSG_ADMIN"), playerName, Data.get().getString("messages." + playerUUID + ".leave")));
-                                sender.sendMessage(message);
-                                return true;
-                            }
+                            String message = formatColors(formatMessage(Data.get().getString("lang.PLUGIN_PREFIX") + Data.get().getString("lang.CLM_DISPLAY_MSG_ADMIN"), playerName, Data.get().getString("messages." + playerUUID + ".leave")));
+                            sender.sendMessage(message);
+                            return true;
                         }
+                        String error = formatColors(Data.get().getString("lang.MSG_NOT_SET"));
+                        sender.sendMessage(error);
+                        return false;
+                    }
+
+                    if (sender instanceof Player)
+                    {
                         // Get player UUID
                         Player player = (Player) sender;
                         String playerUUID = player.getUniqueId().toString();
@@ -140,7 +158,7 @@ public class CommandCustomLeaveMessage implements TabExecutor
                         // Get message from data.yml
                         if (Data.get().getString("messages." + playerUUID + ".leave") != null)
                         {
-                            String message = formatColors(formatMessage(Data.get().getString("lang.CLM_DISPLAY_MSG_PLAYER"), player, Data.get().getString("messages." + playerUUID + ".leave")));
+                            String message = formatColors(formatMessage(Data.get().getString("lang.PLUGIN_PREFIX") + Data.get().getString("lang.CLM_DISPLAY_MSG_PLAYER"), player, Data.get().getString("messages." + playerUUID + ".leave")));
                             sender.sendMessage(message);
                             return true;
                         }
