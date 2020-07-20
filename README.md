@@ -8,14 +8,11 @@ CustomJoinLeaveMessages is a plugin for Spigot/Paper servers that enables you to
 https://www.spigotmc.org/resources/customjoinleavemessages.81720/
 
 # Commands
-/customjoinmessage <view|user [username]> set [message] - View or set custom join message
-alias: cjm
+/customjoinmessage <view|user [username]> set [message] - View or set custom join message, alias: cjm
 
-/customleavemessage <view|user [username]> set [message] - View or set custom leave message
-alias: clm
+/customleavemessage <view|user [username]> set [message] - View or set custom leave message, alias: clm
 
-/customjoinleavemessages <reload> - Plugin info and reload.
-alias: cjlm
+/customjoinleavemessages <reload> - Plugin info and reload, alias: cjlm
 
 # Permissions
 cjlm.customjoinmessage - Allows customjoinmessage command
