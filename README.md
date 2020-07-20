@@ -16,8 +16,13 @@ https://www.spigotmc.org/resources/customjoinleavemessages.81720/
 
 # Permissions
 cjlm.customjoinmessage - Allows customjoinmessage command
+
 cjlm.customjoinmessage.color - Allows use of color in custom join message
+
 cjlm.customleavemessage - Allows customleavemessage command
+
 cjlm.customleavemessage.color - Allows use of color in custom leave message
+
 cjlm.customjoinleavemessages - Allows customjoinleavemessages command
+
 cjlm.customjoinleavemessages.reload - Allows reloading the plugin
